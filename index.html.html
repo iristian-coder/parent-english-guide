@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="亲子英语">
+<title>亲子英语速查手册</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFF8F4;
+  --card: #FFFFFF;
+  --text: #1E1B18;
+  --muted: #A8998E;
+  --border: #F0E8E0;
+  --shadow: 0 3px 14px rgba(0,0,0,0.07);
+  --nav-h: 72px;
+  --accent: #FF6B35;
+  --accent-light: #FFF0EB;
+  --green: #34C759;
+  --green-light: #EDFBF1;
+  --purple: #8B6FD4;
+  --purple-light: #F0ECFF;
+  --blue: #3B9EFF;
+  --blue-light: #EBF5FF;
+  --yellow: #FFB800;
+  --yellow-light: #FFF8E1;
+  --pink: #FF4F87;
+  --pink-light: #FFF0F5;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; }
+body {
+  font-family: 'Noto Sans SC', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ─── HEADER ─── */
+.header {
+  background: var(--card);
+  padding: 0 16px;
+  height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1.5px solid var(--border);
+  flex-shrink: 0;
+  z-index: 10;
+}
+.header-left { display: flex; align-items: center; gap: 10px; }
+.logo {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, #FF6B35, #FF4F87);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; flex-shrink: 0;
+  box-shadow: 0 3px 8px rgba(255,107,53,0.35);
+}
+.header-title { font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 900; }
+.header-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
+.header-right { display: flex; gap: 8px; }
+.icon-circle {
+  width: 36px; height: 36px; border-radius: 50%; border: 1.5px solid var(--border);
+  background: var(--bg); display: flex; align-items: center; justify-content: center;
+  font-size: 16px; cursor: pointer; flex-shrink: 0;
+  transition: background 0.15s, border-color 0.15s;
+}
+.icon-circle:active { background: var(--border); }
+
+/* ─── PAGES ─── */
+.pages { flex: 1; overflow: hidden; position: relative; }
+.page { position: absolute; inset: 0; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px 14px calc(var(--nav-h) + 24px); display: none; }
+.page.active { display: block; }
+
+/* ─── SECTION LABEL ─── */
+.section-label {
+  font-size: 11px; font-weight: 700; color: var(--muted);
+  letter-spacing: 0.8px; text-transform: uppercase;
+  margin: 6px 0 10px 2px;
+}
+
+/* ─── DAILY CARD ─── */
+.daily-card {
+  background: linear-gradient(135deg, #FF6B35 0%, #FF4F87 100%);
+  border-radius: 20px; padding: 18px 18px 16px;
+  margin-bottom: 20px; box-shadow: 0 6px 20px rgba(255,107,53,0.3);
+  position: relative; overflow: hidden;
+}
+.daily-card::before {
+  content: '✨'; position: absolute; right: 14px; top: 12px;
+  font-size: 40px; opacity: 0.2;
+}
+.daily-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.75); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.daily-en { font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: 900; color: white; line-height: 1.35; margin-bottom: 5px; }
+.daily-zh { font-size: 13px; color: rgba(255,255,255,0.82); margin-bottom: 14px; }
+.daily-actions { display: flex; gap: 8px; }
+.daily-btn {
+  padding: 8px 16px; border-radius: 20px; border: none;
+  font-size: 13px; font-weight: 700; font-family: 'Noto Sans SC', sans-serif;
+  cursor: pointer; display: flex; align-items: center; gap: 5px;
+  transition: transform 0.1s;
+}
+.daily-btn:active { transform: scale(0.95); }
+.daily-btn.primary { background: white; color: var(--accent); }
+.daily-btn.ghost { background: rgba(255,255,255,0.2); color: white; border: 1.5px solid rgba(255,255,255,0.4); }
+
+/* ─── SCENE GRID ─── */
+.scene-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.scene-tile {
+  border-radius: 18px; border: 1.5px solid transparent;
+  padding: 16px 14px 14px; cursor: pointer; box-shadow: var(--shadow);
+  transition: transform 0.12s; display: flex; flex-direction: column; gap: 5px;
+  position: relative; overflow: hidden;
+}
+.scene-tile:active { transform: scale(0.95); }
+.tile-emoji { font-size: 30px; margin-bottom: 2px; }
+.tile-name { font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 800; }
+.tile-count { font-size: 11px; opacity: 0.65; font-weight: 600; }
+.tile-fav-dot { position: absolute; top: 10px; right: 10px; font-size: 12px; }
+
+/* Tile color themes */
+.tile-0 { background: linear-gradient(135deg, #FFF3EE, #FFE8DC); color: #C44A1A; border-color: #FFD4C0; }
+.tile-1 { background: linear-gradient(135deg, #EDF8F1, #D6F3E3); color: #1A7A40; border-color: #B8EDD0; }
+.tile-2 { background: linear-gradient(135deg, #EEF3FF, #DDE6FF); color: #2040A0; border-color: #BFD0FF; }
+.tile-3 { background: linear-gradient(135deg, #FFF6E5, #FFECC0); color: #9A6200; border-color: #FFD97A; }
+.tile-4 { background: linear-gradient(135deg, #F5F0FF, #EAE0FF); color: #5230A0; border-color: #C8B8FF; }
+.tile-5 { background: linear-gradient(135deg, #FFF0F5, #FFE0EC); color: #A0204A; border-color: #FFB8D0; }
+.tile-6 { background: linear-gradient(135deg, #E8FBFF, #D0F4FF); color: #0A6080; border-color: #A0E4F8; }
+.tile-7 { background: linear-gradient(135deg, #FFF8E0, #FFF0B0); color: #806000; border-color: #FFE080; }
+.tile-8 { background: linear-gradient(135deg, #F0FFF4, #DCFFE8); color: #186030; border-color: #A0ECC0; }
+.tile-9 { background: linear-gradient(135deg, #FFF2F8, #FFE0F4); color: #801840; border-color: #FFC0E8; }
+
+/* ─── PHRASE LIST ─── */
+.scene-page-header {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+}
+.back-btn {
+  width: 36px; height: 36px; border-radius: 12px; border: 1.5px solid var(--border);
+  background: var(--card); display: flex; align-items: center; justify-content: center;
+  font-size: 18px; cursor: pointer; flex-shrink: 0;
+}
+.scene-page-emoji { font-size: 26px; flex-shrink: 0; }
+.scene-page-title { font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: 900; }
+.scene-page-hint { font-size: 12px; color: var(--muted); margin-top: 1px; }
+.add-phrase-btn {
+  margin-left: auto; background: var(--accent); color: white; border: none;
+  border-radius: 20px; padding: 8px 16px; font-size: 13px;
+  font-family: 'Noto Sans SC', sans-serif; cursor: pointer; font-weight: 700;
+  white-space: nowrap; flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(255,107,53,0.3);
+}
+
+/* ─── PHRASE CARD ─── */
+.phrase-card {
+  background: var(--card); border-radius: 16px; border: 1.5px solid var(--border);
+  padding: 14px 13px 14px 18px; margin-bottom: 10px; box-shadow: var(--shadow);
+  position: relative; overflow: hidden; transition: transform 0.1s;
+}
+.phrase-card:active { transform: scale(0.99); }
+.phrase-card.is-fav::before { background: var(--yellow); }
+.phrase-card.used-recently { border-color: #C8EDD8; }
+.phrase-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+  background: var(--accent); border-radius: 5px 0 0 5px;
+}
+.card-top { display: flex; align-items: flex-start; }
+.card-text { flex: 1; min-width: 0; }
+.en { font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 800; line-height: 1.4; margin-bottom: 4px; }
+.zh { font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+.card-badges { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 10px; }
+.tip-badge { display: inline-block; background: var(--accent-light); color: var(--accent); font-size: 11px; padding: 2px 9px; border-radius: 12px; font-weight: 700; }
+.used-badge { display: inline-block; background: var(--green-light); color: var(--green); font-size: 11px; padding: 2px 9px; border-radius: 12px; font-weight: 700; }
+.card-actions { display: flex; flex-direction: row; gap: 7px; padding-top: 10px; border-top: 1px solid var(--border); }
+.action-btn {
+  flex: 1; height: 34px; border-radius: 10px; border: 1.5px solid var(--border);
+  background: var(--bg); display: flex; align-items: center; justify-content: center;
+  font-size: 15px; cursor: pointer; transition: all 0.12s;
+}
+.action-btn:active { transform: scale(0.94); }
+.action-btn.speaking { background: var(--accent-light); border-color: var(--accent); }
+.action-btn.copied { background: var(--green-light); border-color: var(--green); }
+.action-btn.fav-on { background: var(--yellow-light); border-color: var(--yellow); }
+
+/* ─── FAVORITES PAGE ─── */
+.fav-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+.fav-empty-icon { font-size: 48px; margin-bottom: 12px; }
+.fav-empty-text { font-size: 15px; line-height: 1.8; }
+
+/* ─── HISTORY PAGE ─── */
+.history-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.clear-btn { font-size: 12px; color: var(--muted); cursor: pointer; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--card); }
+.history-item {
+  background: var(--card); border-radius: 14px; border: 1.5px solid var(--border);
+  padding: 12px 14px; margin-bottom: 8px; box-shadow: var(--shadow);
+}
+.history-en { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; margin-bottom: 2px; }
+.history-zh { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+.history-meta { font-size: 11px; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+.history-count { background: var(--accent-light); color: var(--accent); font-size: 11px; padding: 1px 7px; border-radius: 10px; font-weight: 700; }
+.history-empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 14px; line-height: 2; }
+
+/* ─── EDIT PAGE ─── */
+.edit-section-title { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 0.8px; margin-bottom: 10px; text-transform: uppercase; }
+.edit-scene-row {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 16px;
+  padding: 13px 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow);
+}
+.edit-scene-emoji { font-size: 24px; flex-shrink: 0; }
+.edit-scene-info { flex: 1; min-width: 0; }
+.edit-scene-name { font-weight: 700; font-size: 15px; }
+.edit-scene-count { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.edit-scene-btns { display: flex; gap: 6px; flex-shrink: 0; }
+.edit-icon-btn { width: 32px; height: 32px; border-radius: 9px; border: 1.5px solid var(--border); background: var(--bg); display: flex; align-items: center; justify-content: center; font-size: 14px; cursor: pointer; }
+.edit-icon-btn.danger { background: #FFF0F0; border-color: #FFCDD2; }
+.add-scene-btn {
+  width: 100%; padding: 15px; border-radius: 16px; border: 2px dashed var(--border);
+  background: transparent; font-size: 14px; color: var(--muted); cursor: pointer;
+  font-family: 'Noto Sans SC', sans-serif; margin-top: 4px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.add-scene-btn:hover, .add-scene-btn:active { border-color: var(--accent); color: var(--accent); }
+
+/* ─── SEARCH ─── */
+.search-overlay {
+  position: absolute; inset: 0; background: var(--bg); z-index: 50;
+  display: none; flex-direction: column; padding-bottom: var(--nav-h);
+}
+.search-overlay.open { display: flex; }
+.search-bar { padding: 12px 14px; background: var(--card); border-bottom: 1.5px solid var(--border); display: flex; gap: 10px; align-items: center; }
+.search-bar input {
+  flex: 1; padding: 10px 16px; border-radius: 22px; border: 1.5px solid var(--border);
+  font-size: 15px; font-family: 'Noto Sans SC', sans-serif; background: var(--bg); outline: none; color: var(--text);
+}
+.search-bar input:focus { border-color: var(--accent); }
+.search-cancel { font-size: 14px; color: var(--accent); cursor: pointer; white-space: nowrap; font-weight: 700; }
+.search-results { flex: 1; overflow-y: auto; padding: 12px 14px; }
+.search-empty { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 14px; line-height: 2; }
+.cat-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; font-weight: 700; }
+
+/* ─── BOTTOM NAV ─── */
+.bottom-nav {
+  position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 480px; height: var(--nav-h);
+  background: var(--card); border-top: 1.5px solid var(--border);
+  display: flex; align-items: stretch; z-index: 20;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.nav-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 3px; cursor: pointer; border: none; background: none;
+  font-family: 'Noto Sans SC', sans-serif; color: var(--muted); transition: color 0.15s; padding: 0;
+}
+.nav-item.active { color: var(--accent); }
+.nav-item.active .nav-icon { transform: scale(1.15); }
+.nav-icon { font-size: 22px; line-height: 1; transition: transform 0.15s; }
+.nav-label { font-size: 10px; font-weight: 700; }
+
+/* ─── MODAL ─── */
+.modal-bg {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200;
+  display: none; align-items: flex-end; justify-content: center;
+}
+.modal-bg.open { display: flex; }
+.modal {
+  background: var(--card); border-radius: 24px 24px 0 0; padding: 24px 18px 36px;
+  width: 100%; max-width: 480px; max-height: 90vh; overflow-y: auto;
+}
+.modal-drag { width: 36px; height: 4px; background: var(--border); border-radius: 4px; margin: 0 auto 18px; }
+.modal-title { font-family: 'Nunito', sans-serif; font-size: 20px; font-weight: 900; margin-bottom: 16px; }
+.modal label { display: block; font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 5px; margin-top: 14px; letter-spacing: 0.3px; }
+.modal input, .modal textarea {
+  width: 100%; padding: 11px 14px; border-radius: 12px; border: 1.5px solid var(--border);
+  font-size: 15px; font-family: 'Noto Sans SC', sans-serif; background: var(--bg); outline: none; color: var(--text);
+  transition: border-color 0.15s;
+}
+.modal input:focus, .modal textarea:focus { border-color: var(--accent); }
+.modal textarea { resize: vertical; min-height: 78px; line-height: 1.6; }
+.modal-btns { display: flex; gap: 10px; margin-top: 20px; }
+.btn-primary { flex: 1; padding: 14px; border-radius: 14px; border: none; background: linear-gradient(135deg, #FF6B35, #FF4F87); color: white; font-size: 16px; font-weight: 800; font-family: 'Noto Sans SC', sans-serif; cursor: pointer; box-shadow: 0 4px 12px rgba(255,107,53,0.3); }
+.btn-secondary { flex: 1; padding: 14px; border-radius: 14px; border: 1.5px solid var(--border); background: var(--bg); color: var(--text); font-size: 16px; font-family: 'Noto Sans SC', sans-serif; cursor: pointer; }
+.del-btn { width: 100%; padding: 13px; border-radius: 14px; border: 1.5px solid #FFCDD2; background: #FFF5F5; color: #C62828; font-size: 14px; font-family: 'Noto Sans SC', sans-serif; cursor: pointer; margin-top: 12px; font-weight: 600; }
+
+/* ─── TOAST ─── */
+.toast {
+  position: fixed; bottom: calc(var(--nav-h) + 18px); left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #1E1B18; color: white; font-size: 13px; font-weight: 600;
+  padding: 10px 22px; border-radius: 22px; opacity: 0; transition: all 0.22s;
+  z-index: 300; pointer-events: none; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+/* ─── STORY FULL VIEW ─── */
+.story-full-card {
+  background: var(--card); border-radius: 18px; border: 1.5px solid var(--border);
+  padding: 22px 20px; margin-bottom: 14px; box-shadow: var(--shadow);
+}
+.story-full-en {
+  font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 700;
+  line-height: 2; color: var(--text); margin-bottom: 16px;
+}
+.story-full-divider {
+  height: 1px; background: var(--border); margin-bottom: 14px;
+}
+.story-full-zh {
+  font-size: 13px; color: var(--muted); line-height: 2.2;
+}
+.story-bottom-actions {
+  display: flex; gap: 10px; margin-bottom: 14px;
+}
+.story-action-big {
+  flex: 1; padding: 13px; border-radius: 14px; border: none;
+  background: var(--accent); color: white; font-size: 15px; font-weight: 700;
+  font-family: 'Noto Sans SC', sans-serif; cursor: pointer;
+  box-shadow: 0 3px 10px rgba(255,107,53,0.3);
+}
+.story-action-big.ghost {
+  background: var(--bg); color: var(--muted); border: 1.5px solid var(--border);
+  box-shadow: none; font-weight: 500;
+}
+.story-para-list {
+  background: var(--card); border-radius: 14px; border: 1.5px solid var(--border);
+  overflow: hidden; margin-bottom: 10px;
+}
+.story-para-toggle {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 13px 16px; cursor: pointer; font-size: 13px; color: var(--muted); font-weight: 600;
+}
+.story-para-row {
+  padding: 11px 16px; border-top: 1px solid var(--border);
+}
+.story-para-row-en { font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+.story-para-row-zh { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+.story-para-row-btns { display: flex; gap: 6px; }
+/* ─── STORY LIST ─── */
+.story-card {
+  background: var(--card); border-radius: 18px; border: 1.5px solid var(--border);
+  padding: 16px 18px; margin-bottom: 12px; box-shadow: var(--shadow);
+  cursor: pointer; transition: transform 0.1s; display: flex; align-items: center; gap: 14px;
+}
+.story-card:active { transform: scale(0.97); }
+.story-card-emoji { font-size: 32px; flex-shrink: 0; }
+.story-card-info { flex: 1; min-width: 0; }
+.story-card-title { font-family: "Nunito", sans-serif; font-size: 17px; font-weight: 900; margin-bottom: 3px; }
+.story-card-hint { font-size: 12px; color: var(--muted); }
+.story-card-count { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.add-story-btn {
+  width: 100%; padding: 16px; border-radius: 18px; border: 2px dashed var(--border);
+  background: transparent; font-size: 14px; color: var(--muted); cursor: pointer;
+  font-family: "Noto Sans SC", sans-serif; margin-top: 4px;
+  transition: border-color 0.15s, color 0.15s;
+}
+.add-story-btn:active { border-color: var(--accent); color: var(--accent); }
+
+/* ─── STORY READER ─── */
+.story-para {
+  background: var(--card); border-radius: 14px; border: 1.5px solid var(--border);
+  padding: 14px 16px 12px 20px; margin-bottom: 10px; box-shadow: var(--shadow);
+  position: relative; overflow: hidden;
+}
+.story-para::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: var(--blue); border-radius: 4px 0 0 4px;
+}
+.story-en { font-family: "Nunito", sans-serif; font-size: 16px; font-weight: 700; line-height: 1.5; margin-bottom: 5px; color: var(--text); }
+.story-zh { font-size: 12px; color: var(--muted); line-height: 1.6; margin-bottom: 10px; }
+.story-para-actions { display: flex; gap: 7px; padding-top: 9px; border-top: 1px solid var(--border); }
+
+/* ─── PICTUREBOOK ─── */
+.pb-card {
+  background: var(--card); border-radius: 18px; border: 1.5px solid var(--border);
+  padding: 16px 18px; margin-bottom: 12px; box-shadow: var(--shadow);
+  cursor: pointer; transition: transform 0.1s; display: flex; align-items: center; gap: 14px;
+}
+.pb-card:active { transform: scale(0.97); }
+.pb-card-emoji { font-size: 32px; flex-shrink: 0; }
+.pb-card-info { flex: 1; min-width: 0; }
+.pb-card-title { font-family: "Nunito", sans-serif; font-size: 17px; font-weight: 900; margin-bottom: 3px; }
+.pb-card-hint { font-size: 12px; color: var(--muted); }
+.pb-card-count { font-size: 11px; color: var(--muted); margin-top: 4px; }
+.pb-page-card {
+  background: var(--card); border-radius: 14px; border: 1.5px solid var(--border);
+  padding: 14px 16px 12px 20px; margin-bottom: 10px; box-shadow: var(--shadow);
+  position: relative; overflow: hidden;
+}
+.pb-page-card::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+  background: var(--green); border-radius: 4px 0 0 4px;
+}
+.pb-page-num { font-size: 11px; color: var(--muted); font-weight: 700; margin-bottom: 4px; letter-spacing: 0.5px; }
+.pb-page-text { font-family: "Nunito", sans-serif; font-size: 16px; font-weight: 700; line-height: 1.5; margin-bottom: 4px; }
+.pb-page-zh { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+.pb-page-guide { background: var(--green-light); border-radius: 8px; padding: 6px 10px; font-size: 11px; color: #1A7A40; font-weight: 600; margin-bottom: 10px; }
+.pb-page-actions { display: flex; gap: 7px; padding-top: 9px; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo">🌱</div>
+    <div>
+      <div class="header-title">亲子英语</div>
+      <div class="header-sub">宝宝语言启蒙速查手册</div>
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="icon-circle" onclick="openSearch()">🔍</div>
+  </div>
+</div>
+
+<div class="pages">
+
+  <!-- HOME -->
+  <div class="page active" id="page-home">
+    <div id="dailyWrap"></div>
+    <div class="section-label">所有场景</div>
+    <div class="scene-grid" id="sceneGrid"></div>
+  </div>
+
+  <!-- PHRASES -->
+  <div class="page" id="page-phrases">
+    <div class="scene-page-header">
+      <div class="back-btn" onclick="goHome()">←</div>
+      <div class="scene-page-emoji" id="phrasePageEmoji"></div>
+      <div style="flex:1;min-width:0;">
+        <div class="scene-page-title" id="phrasePageTitle"></div>
+        <div class="scene-page-hint" id="phrasePageHint"></div>
+      </div>
+      <button class="add-phrase-btn" onclick="openAddPhrase()">＋ 添加</button>
+    </div>
+    <div id="phraseList"></div>
+  </div>
+
+  <!-- FAVORITES -->
+  <div class="page" id="page-fav">
+    <div class="section-label" style="margin-top:4px;">我的收藏 ⭐</div>
+    <div id="favList"></div>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="page" id="page-history">
+    <div class="history-header">
+      <div class="section-label" style="margin:0;">学习记录 📈</div>
+      <div class="clear-btn" onclick="clearHistory()">清空记录</div>
+    </div>
+    <div id="historyList"></div>
+  </div>
+
+  <!-- EDIT -->
+  <div class="page" id="page-edit">
+    <div class="edit-section-title">场景管理</div>
+    <div id="editSceneList"></div>
+    <button class="add-scene-btn" onclick="openAddScene()">＋ 新建场景</button>
+  </div>
+
+  <!-- PICTUREBOOK -->
+  <div class="page" id="page-picturebook">
+    <div id="pbList"></div>
+  </div>
+
+  <!-- PICTUREBOOK READER -->
+  <div class="page" id="page-pb-reader">
+    <div class="scene-page-header">
+      <div class="back-btn" onclick="goPicturebooks()">←</div>
+      <div style="flex:1;min-width:0;">
+        <div class="scene-page-title" id="pbReaderTitle"></div>
+        <div class="scene-page-hint" id="pbReaderHint"></div>
+      </div>
+      <button class="add-phrase-btn" onclick="openEditPb()">✏️ 编辑</button>
+    </div>
+    <div id="pbContent"></div>
+  </div>
+
+  <!-- STORIES -->
+  <div class="page" id="page-stories">
+    <div id="storiesList"></div>
+  </div>
+
+  <!-- STORY READER -->
+  <div class="page" id="page-story-reader">
+    <div class="scene-page-header">
+      <div class="back-btn" onclick="goStories()">←</div>
+      <div style="flex:1;min-width:0;">
+        <div class="scene-page-title" id="storyReaderTitle"></div>
+        <div class="scene-page-hint" id="storyReaderHint"></div>
+      </div>
+      <button class="add-phrase-btn" onclick="openEditStory()">✏️ 编辑</button>
+    </div>
+    <div id="storyContent"></div>
+  </div>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-bar">
+      <input type="search" id="searchInput" placeholder="搜索场景或句子…" autocomplete="off" oninput="doSearch(this.value)">
+      <div class="search-cancel" onclick="closeSearch()">取消</div>
+    </div>
+    <div class="search-results" id="searchResults">
+      <div class="search-empty">输入关键词开始搜索<br>支持中英文 🔤</div>
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="nav-item active" id="nav-home" onclick="switchNav('home')">
+    <span class="nav-icon">🏠</span><span class="nav-label">场景</span>
+  </button>
+  <button class="nav-item" id="nav-picturebook" onclick="switchNav('picturebook')">
+    <span class="nav-icon">🎨</span><span class="nav-label">绘本</span>
+  </button>
+  <button class="nav-item" id="nav-stories" onclick="switchNav('stories')">
+    <span class="nav-icon">📖</span><span class="nav-label">故事</span>
+  </button>
+  <button class="nav-item" id="nav-fav" onclick="switchNav('fav')">
+    <span class="nav-icon">⭐</span><span class="nav-label">收藏</span>
+  </button>
+  <button class="nav-item" id="nav-history" onclick="switchNav('history')">
+    <span class="nav-icon">📈</span><span class="nav-label">记录</span>
+  </button>
+  <button class="nav-item" id="nav-edit" onclick="switchNav('edit')">
+    <span class="nav-icon">✏️</span><span class="nav-label">编辑</span>
+  </button>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="closeModalBg(event)">
+  <div class="modal">
+    <div class="modal-drag"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div id="modalBody"></div>
+    <div class="modal-btns">
+      <button class="btn-secondary" onclick="closeModal()">取消</button>
+      <button class="btn-primary" onclick="modalSave()">保存</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ─── DATA ───
+const DEFAULT = [
+  {id:"wakeup",label:"起床",emoji:"🌅",hint:"早上醒来、穿衣洗漱",phrases:[
+    {en:"Good morning! Time to wake up!",zh:"早上好！该起床了！",tip:"配上夸张的语气"},
+    {en:"Rise and shine!",zh:"起来啦，太阳晒屁股了！",tip:"比 wake up 更活泼"},
+    {en:"Did you sleep well?",zh:"睡得好吗？",tip:""},
+    {en:"You had such a long sleep!",zh:"你睡了好久哦！",tip:""},
+    {en:"Let's open the curtains. Good morning, sunshine!",zh:"来拉开窗帘，早上好，阳光！",tip:"让孩子帮忙拉"},
+    {en:"Let's get dressed. Shirt first!",zh:"来穿衣服，先穿上衣！",tip:"一边说一边做动作"},
+    {en:"Put on your pants. One leg, two legs!",zh:"穿裤子，一条腿，两条腿！",tip:"让孩子跟着数"},
+    {en:"Where are your socks? Here they are!",zh:"袜子在哪里？在这里！",tip:""},
+    {en:"Which shirt do you want? The red one or the blue one?",zh:"你想穿哪件？红色的还是蓝色的？",tip:"给孩子选择感"},
+    {en:"Are you still sleepy?",zh:"还困吗？",tip:"表情夸张地问"},
+    {en:"Let's wash our face. Splash splash!",zh:"来洗脸，哗哗哗！",tip:""},
+    {en:"Let's brush your teeth first.",zh:"先刷牙。",tip:""},
+    {en:"Let's brush your hair.",zh:"来梳头发。",tip:""},
+    {en:"Do you need to use the potty?",zh:"要上厕所吗？",tip:""},
+    {en:"Let's have breakfast. Are you hungry?",zh:"来吃早饭，你饿了吗？",tip:""},
+    {en:"Almost ready! Let's go!",zh:"快准备好了！走吧！",tip:""},
+    {en:"Give me a good morning hug!",zh:"给我一个早安抱抱！",tip:"建立温暖的早晨仪式"},
+  ]},
+  {id:"meal",label:"吃饭",emoji:"🍚",hint:"早中晚餐、点心时间",phrases:[
+    {en:"Time to eat! Come sit down.",zh:"吃饭啦！过来坐好。",tip:""},
+    {en:"Wash your hands first. Let's go!",zh:"先洗手，走！",tip:"饭前必说"},
+    {en:"Sit up straight in your chair.",zh:"坐直，坐好。",tip:""},
+    {en:"What would you like to eat?",zh:"你想吃什么？",tip:""},
+    {en:"Do you want more rice?",zh:"还要米饭吗？",tip:"换成 noodles/bread 也通用"},
+    {en:"Open your mouth. Here comes the airplane!",zh:"张嘴，飞机来咯！",tip:"勺子当飞机哄饭"},
+    {en:"Yummy! So delicious!",zh:"好吃！超级香！",tip:"自己先夸，带动孩子"},
+    {en:"Try it! Just one bite.",zh:"尝一口嘛，就一口。",tip:"面对挑食时用"},
+    {en:"Mmm, what does it taste like?",zh:"嗯，是什么味道？",tip:"引导孩子描述食物"},
+    {en:"Blow on it, it's hot!",zh:"吹一吹，很烫！",tip:""},
+    {en:"Take a sip of water.",zh:"喝一口水。",tip:""},
+    {en:"Use your spoon. Like this!",zh:"用勺子，像这样！",tip:""},
+    {en:"Don't play with your food, please.",zh:"不要玩食物哦。",tip:"温和提醒"},
+    {en:"Almost done! One more bite!",zh:"快吃完了！再吃一口！",tip:""},
+    {en:"Good job! You finished everything!",zh:"真棒！全部吃完啦！",tip:"吃完一定要夸"},
+    {en:"Are you full? Okay, you can stop.",zh:"吃饱了吗？好，可以停了。",tip:"尊重孩子饱腹感"},
+    {en:"Let's wipe your mouth. Here you go.",zh:"来擦嘴，好了。",tip:""},
+    {en:"Thank you for eating so nicely today!",zh:"今天吃饭吃得很好，谢谢你！",tip:""},
+  ]},
+  {id:"outing",label:"出门",emoji:"👟",hint:"穿鞋、出门、坐车、逛街",phrases:[
+    {en:"Let's go outside!",zh:"我们出去玩吧！",tip:""},
+    {en:"Time to put on your shoes.",zh:"该穿鞋子了。",tip:""},
+    {en:"Sit down first, then put on your shoes.",zh:"先坐下来，再穿鞋。",tip:""},
+    {en:"Which shoes do you want to wear today?",zh:"今天想穿哪双鞋？",tip:""},
+    {en:"Let's put on your jacket. It's a little chilly.",zh:"穿上外套，有点凉。",tip:""},
+    {en:"Do you have your bag?",zh:"你的包包带了吗？",tip:""},
+    {en:"Hold my hand. The road is busy.",zh:"拉着我的手，马路上车多。",tip:""},
+    {en:"Look both ways before we cross.",zh:"过马路前左右看。",tip:"边说边做动作"},
+    {en:"Stay close to me, okay?",zh:"跟紧我，好吗？",tip:""},
+    {en:"We're going to the park today!",zh:"我们今天去公园！",tip:""},
+    {en:"Look! A bus! A dog! A flower!",zh:"看！公共汽车！小狗！花花！",tip:"路上随时指认"},
+    {en:"What color is that car?",zh:"那辆车是什么颜色的？",tip:"路上玩颜色认知"},
+    {en:"Sit still in the car seat.",zh:"在安全座椅里坐好。",tip:""},
+    {en:"We're almost there!",zh:"快到了！",tip:""},
+    {en:"We're here! Let's get out.",zh:"到了！我们下车吧。",tip:""},
+    {en:"Time to go home. Say bye-bye!",zh:"要回家了，说拜拜！",tip:""},
+    {en:"Let's go home now.",zh:"我们回家啦。",tip:""},
+    {en:"Did you have fun today?",zh:"今天玩得开心吗？",tip:"回程路上聊聊"},
+  ]},
+  {id:"play",label:"玩耍",emoji:"🧸",hint:"室内玩具、户外活动、创意游戏",phrases:[
+    {en:"What do you want to play?",zh:"你想玩什么？",tip:""},
+    {en:"Let's play together!",zh:"我们一起玩！",tip:""},
+    {en:"Let's build a tower! Stack them up!",zh:"来搭塔！一块一块叠上去！",tip:""},
+    {en:"How tall can we make it?",zh:"我们能搭多高？",tip:""},
+    {en:"Oh no, it fell down! Let's build it again!",zh:"哎呀，倒掉了！我们再搭！",tip:"培养挫折恢复力"},
+    {en:"Throw the ball to me!",zh:"把球扔给我！",tip:""},
+    {en:"Catch! Ready?",zh:"接住！准备好了吗？",tip:""},
+    {en:"Roll the ball. Like this!",zh:"滚球球，像这样！",tip:""},
+    {en:"Let's do a puzzle!",zh:"来拼拼图！",tip:""},
+    {en:"Where does this piece go?",zh:"这一块放哪里？",tip:"一起找"},
+    {en:"Let's draw! What should we draw?",zh:"来画画！画什么好呢？",tip:""},
+    {en:"Wow, that's a beautiful drawing!",zh:"哇，画得真漂亮！",tip:""},
+    {en:"Push the swing! Wheee!",zh:"推秋千！呼～",tip:""},
+    {en:"Slide down! Here we go!",zh:"滑下来！冲啊！",tip:""},
+    {en:"Run run run! Can you catch me?",zh:"跑跑跑！你能追到我吗？",tip:""},
+    {en:"Let's jump! One, two, three, jump!",zh:"来跳！一、二、三、跳！",tip:""},
+    {en:"Let's clean up. Put the toys away.",zh:"来收玩具，把玩具放回去。",tip:""},
+    {en:"Five more minutes, okay?",zh:"再玩五分钟好吗？",tip:"给孩子过渡时间"},
+    {en:"That was so much fun! Let's do it again tomorrow.",zh:"太好玩了！明天再玩。",tip:""},
+  ]},
+  {id:"bath",label:"洗澡",emoji:"🛁",hint:"洗澡、洗脸、刷牙、洗手",phrases:[
+    {en:"Bath time! Let's go!",zh:"洗澡时间！走吧！",tip:""},
+    {en:"Can you help me turn on the water?",zh:"你来帮我开水好吗？",tip:"让孩子参与"},
+    {en:"Let's check the temperature. Is it okay?",zh:"来试试水温，可以吗？",tip:""},
+    {en:"Is the water too hot or too cold?",zh:"水太热还是太冷？",tip:"让孩子自己感受"},
+    {en:"Let's get in! One foot, two feet!",zh:"进去吧！一只脚，两只脚！",tip:""},
+    {en:"Splash splash! So fun!",zh:"扑通扑通！好好玩！",tip:""},
+    {en:"Let's wash your face first.",zh:"先洗脸。",tip:""},
+    {en:"Let's wash your neck. Don't forget behind your ears!",zh:"洗脖子，别忘了耳朵后面！",tip:""},
+    {en:"Scrub scrub! Wash your tummy!",zh:"搓搓搓！洗肚子！",tip:"一边说一边帮孩子搓"},
+    {en:"Let's wash your arms. Up and down!",zh:"洗胳膊，上下上下！",tip:""},
+    {en:"Now your legs. Scrub scrub!",zh:"现在洗腿，搓搓搓！",tip:""},
+    {en:"Let's wash your hair. Close your eyes!",zh:"洗头啦，闭上眼睛！",tip:""},
+    {en:"No water in your eyes, I promise!",zh:"我保证水不会进眼睛！",tip:"消除洗头恐惧"},
+    {en:"Rinse! Three, two, one — done!",zh:"冲水！三、二、一——好了！",tip:"倒计时减少抗拒"},
+    {en:"All clean! Good job!",zh:"洗干净啦！真棒！",tip:""},
+    {en:"Time to get out. Let's wrap you in a towel!",zh:"出来啦，用毛巾包起来！",tip:""},
+    {en:"So cozy and warm!",zh:"好温暖好舒服！",tip:""},
+    {en:"Now let's brush your teeth. Open wide!",zh:"现在刷牙，张大嘴！",tip:""},
+    {en:"Brush brush brush! Top teeth, bottom teeth!",zh:"刷刷刷！上面的牙，下面的牙！",tip:""},
+    {en:"Spit! Good job!",zh:"吐出来！做得好！",tip:""},
+  ]},
+  {id:"bedtime",label:"睡觉",emoji:"🌙",hint:"睡前仪式、讲故事、安抚入睡",phrases:[
+    {en:"It's getting late. Time to wind down.",zh:"天晚了，慢慢安静下来吧。",tip:"提前预告，减少抗拒"},
+    {en:"Let's turn off the TV. Bedtime soon!",zh:"关电视啦，快要睡觉了！",tip:""},
+    {en:"Go use the potty before bed.",zh:"睡觉前去上个厕所。",tip:""},
+    {en:"It's bedtime. Let's say goodnight.",zh:"该睡觉了，来说晚安。",tip:""},
+    {en:"Shall we read a book first?",zh:"先读本书好吗？",tip:""},
+    {en:"Which book tonight?",zh:"今晚读哪本？",tip:""},
+    {en:"Snuggle up! Let's get cozy.",zh:"靠过来！舒舒服服地。",tip:""},
+    {en:"Lie down. Pull up the blanket.",zh:"躺下来，把被子拉上来。",tip:""},
+    {en:"Are you comfortable?",zh:"你舒服吗？",tip:""},
+    {en:"The story is finished. Time to sleep.",zh:"故事讲完了，该睡觉了。",tip:""},
+    {en:"Close your eyes. Think of something happy.",zh:"闭上眼睛，想想开心的事。",tip:""},
+    {en:"Shhh, it's quiet time now.",zh:"嘘，现在要安静咯。",tip:""},
+    {en:"The moon is out. The stars are shining.",zh:"月亮出来了，星星在闪光。",tip:""},
+    {en:"All the animals are sleeping too.",zh:"小动物们也都睡着了。",tip:"让孩子有陪伴感"},
+    {en:"I'll be right here if you need me.",zh:"你需要我的话，我就在这里。",tip:"给孩子安全感"},
+    {en:"Close your eyes. Go to sleep.",zh:"闭上眼睛，睡觉觉。",tip:"声音放轻柔"},
+    {en:"I love you to the moon and back.",zh:"我爱你，爱到月亮又回来。",tip:"经典睡前句"},
+    {en:"Sweet dreams, my love.",zh:"做个好梦，宝贝。",tip:"每晚固定说，建立仪式感"},
+  ]},
+  {id:"emotions",label:"情绪",emoji:"💛",hint:"哭闹、开心、害怕、安抚",phrases:[
+    {en:"Are you okay? Did you hurt yourself?",zh:"你还好吗？有没有受伤？",tip:""},
+    {en:"Let me see. Where does it hurt?",zh:"让我看看，哪里疼？",tip:""},
+    {en:"It's okay. Mama and Daddy are here.",zh:"没事的，妈妈爸爸在这里。",tip:"轻声说，给安全感"},
+    {en:"Do you want a hug?",zh:"要不要抱抱？",tip:""},
+    {en:"I've got you. You're safe.",zh:"我在呢，你很安全。",tip:"孩子受惊时用"},
+    {en:"It's okay to cry. Let it out.",zh:"可以哭的，哭出来吧。",tip:"接纳情绪"},
+    {en:"Are you feeling sad right now?",zh:"你现在难过吗？",tip:"帮孩子识别情绪"},
+    {en:"I understand. That made you angry.",zh:"我理解，那让你生气了。",tip:""},
+    {en:"Don't be scared. I'm right here.",zh:"不要怕，我就在这里。",tip:""},
+    {en:"Take a deep breath. In… and out.",zh:"深呼吸，吸气……呼气。",tip:"示范给孩子看"},
+    {en:"Are you feeling better now?",zh:"现在好一点了吗？",tip:""},
+    {en:"You're so happy today! I love your smile.",zh:"你今天好开心！我喜欢你的笑容。",tip:""},
+    {en:"Did something make you upset?",zh:"有什么让你不开心吗？",tip:"引导孩子说出来"},
+    {en:"It's okay to feel that way.",zh:"有这种感觉是没关系的。",tip:""},
+    {en:"Good sharing! You're so kind.",zh:"分享得很好！你真善良。",tip:""},
+    {en:"You were very brave!",zh:"你很勇敢！",tip:"打针或受伤后"},
+    {en:"I'm so glad you told me how you feel.",zh:"很高兴你告诉我你的感受。",tip:"鼓励情绪表达"},
+  ]},
+  {id:"praise",label:"鼓励",emoji:"⭐",hint:"日常表扬、鼓励尝试、建立自信",phrases:[
+    {en:"Good job! Well done!",zh:"做得好！太棒了！",tip:"最万能的夸奖句"},
+    {en:"You did it! I'm so proud of you.",zh:"你做到了！我好骄傲！",tip:""},
+    {en:"That was really hard and you did it!",zh:"这很难，但你做到了！",tip:"强调努力过程"},
+    {en:"You're getting better every day!",zh:"你每天都在进步！",tip:""},
+    {en:"I love how hard you tried.",zh:"我喜欢你努力的样子。",tip:"夸努力不夸聪明"},
+    {en:"Try again. You can do it!",zh:"再试一次，你可以的！",tip:""},
+    {en:"Don't give up! Keep going!",zh:"不要放弃！继续！",tip:""},
+    {en:"Wow, look at that! You made that!",zh:"哇，看看这个！你做的！",tip:"配上惊喜的表情"},
+    {en:"That's amazing! How did you do that?",zh:"太厉害了！你怎么做到的？",tip:""},
+    {en:"I believe in you.",zh:"我相信你。",tip:"简单有力"},
+    {en:"High five!",zh:"击掌！",tip:"孩子最爱的互动"},
+    {en:"You're such a clever kid!",zh:"你真是个聪明的孩子！",tip:""},
+    {en:"You worked so hard on that!",zh:"你为这个努力了好久！",tip:""},
+    {en:"I love seeing you learn new things.",zh:"我喜欢看你学新东西。",tip:""},
+    {en:"That's a great idea!",zh:"这个主意真棒！",tip:""},
+    {en:"You make me so happy.",zh:"你让我好开心。",tip:""},
+    {en:"Keep going! Almost there!",zh:"继续！快成功了！",tip:""},
+    {en:"You should be proud of yourself!",zh:"你应该为自己感到骄傲！",tip:""},
+  ]},
+  {id:"book",label:"读绘本",emoji:"📚",hint:"亲子阅读、牛津树、读书互动",phrases:[
+    {en:"Let's read a book together!",zh:"我们一起读书吧！",tip:""},
+    {en:"Which book do you want tonight?",zh:"今晚想读哪本书？",tip:""},
+    {en:"Go pick a book. You choose!",zh:"去挑一本书，你来选！",tip:"给孩子自主权"},
+    {en:"Let's sit together and read.",zh:"我们坐在一起读书。",tip:""},
+    {en:"Look at the cover. What do you see?",zh:"看封面，你看到什么？",tip:"读前预测习惯"},
+    {en:"Look at the picture. What's happening?",zh:"看这幅图，发生什么了？",tip:"引导孩子描述"},
+    {en:"Who is this? Can you point?",zh:"这是谁？你能指出来吗？",tip:""},
+    {en:"What color is that?",zh:"那是什么颜色？",tip:""},
+    {en:"Can you find the dog?",zh:"你能找到小狗吗？",tip:""},
+    {en:"What happens next? Let's guess!",zh:"接下来会怎样？我们来猜猜！",tip:""},
+    {en:"Oh no! What did he do?",zh:"哎呀！他做了什么？",tip:"夸张反应带动参与感"},
+    {en:"How do you think he feels?",zh:"你觉得他现在感觉怎么样？",tip:"培养情绪理解"},
+    {en:"That's so funny! Ha ha ha!",zh:"太好笑了！哈哈哈！",tip:"情绪投入"},
+    {en:"Wow! What a surprise!",zh:"哇！真是个惊喜！",tip:""},
+    {en:"The end! What did you think?",zh:"结束啦！你觉得怎么样？",tip:"读后讨论"},
+    {en:"Shall we read it again?",zh:"再读一遍好吗？",tip:"重复读加深记忆"},
+    {en:"That was a great story!",zh:"这个故事真棒！",tip:""},
+    {en:"Good listening! You paid attention the whole time.",zh:"听得很认真！一直都专注着。",tip:""},
+  ]},
+  {id:"body",label:"身体",emoji:"🙋",hint:"认识身体、运动游戏、日常互动",phrases:[
+    {en:"Where is your nose? There it is!",zh:"鼻子在哪里？在这里！",tip:"指着自己示范"},
+    {en:"Touch your ears!",zh:"摸耳朵！",tip:""},
+    {en:"Touch your head!",zh:"摸头！",tip:""},
+    {en:"Where are your eyes? Blink blink!",zh:"眼睛在哪里？眨眨眼！",tip:""},
+    {en:"Show me your mouth. Open wide!",zh:"给我看嘴巴，张大！",tip:""},
+    {en:"Where is your tummy? Pat pat!",zh:"肚子在哪里？拍拍！",tip:""},
+    {en:"How many fingers? One, two, three!",zh:"几根手指？一，二，三！",tip:""},
+    {en:"Wiggle your fingers!",zh:"动动手指！",tip:""},
+    {en:"Can you touch your toes?",zh:"你能摸到脚趾吗？",tip:""},
+    {en:"Clap your hands! Clap clap clap!",zh:"拍拍手！拍拍拍！",tip:""},
+    {en:"Stomp your feet! Stomp stomp!",zh:"跺跺脚！跺跺跺！",tip:""},
+    {en:"Let's stretch! Arms up high!",zh:"来伸个懒腰！手臂高高举起！",tip:""},
+    {en:"Shake your whole body! Wiggle wiggle!",zh:"整个身体摇一摇！扭扭扭！",tip:""},
+    {en:"Jump up and down!",zh:"跳上跳下！",tip:""},
+    {en:"Spin around! Round and round!",zh:"转圈圈！转转转！",tip:""},
+    {en:"Sit down. Cross your legs.",zh:"坐下来，盘腿坐。",tip:""},
+    {en:"Give me a big hug!",zh:"给我一个大抱抱！",tip:""},
+    {en:"Give me a kiss!",zh:"亲一个！",tip:""},
+    {en:"Open your mouth wide. Say ahhh!",zh:"张大嘴巴，啊～",tip:"刷牙或喂药时用"},
+    {en:"Blow a kiss! Mwah!",zh:"飞吻！么～",tip:""},
+  ]},
+  {id:"kitchen",label:"厨房帮忙",emoji:"🥬",hint:"陪大人做饭、认识食材",phrases:[
+    {en:"Do you want to help me in the kitchen?",zh:"你想来厨房帮忙吗？",tip:"邀请孩子参与"},
+    {en:"Help me wash the vegetables, please.",zh:"帮我洗蔬菜吧。",tip:""},
+    {en:"Can you pick off the leaves for me?",zh:"帮我摘菜叶子好吗？",tip:"摘菜专用"},
+    {en:"Help me peel the beans. Pop them out like this!",zh:"帮我剥豆子，像这样按出来！",tip:"边示范边说"},
+    {en:"Can you help me chop the vegetables?",zh:"你可以帮我切菜吗？",tip:"让孩子用安全刀"},
+    {en:"This apple needs to be peeled before we eat it.",zh:"这个苹果要削皮才能吃。",tip:""},
+    {en:"Can you help me peel the pomelo?",zh:"帮我剥柚子吧。",tip:""},
+    {en:"Peel it slowly. Like this!",zh:"慢慢剥，像这样！",tip:""},
+    {en:"The tissues are all gone. Let's open a new roll!",zh:"纸巾用完了，再开一卷新的吧。",tip:""},
+    {en:"Can you pass me that bowl?",zh:"你能把那个碗递给我吗？",tip:""},
+    {en:"Be careful, the stove is hot!",zh:"小心，炉子很烫！",tip:"安全提醒"},
+    {en:"Don't touch that, it's sharp.",zh:"不要碰那个，很锋利。",tip:""},
+    {en:"Let's wash our hands before we cook.",zh:"做饭前先洗手。",tip:""},
+    {en:"Wow, it smells so good!",zh:"哇，好香！",tip:""},
+    {en:"You're such a great helper!",zh:"你真是个好帮手！",tip:"做完一定要夸"},
+    {en:"We made this together!",zh:"这是我们一起做的！",tip:"建立成就感"},
+  ]},
+  {id:"comfort",label:"安慰陪伴",emoji:"🤗",hint:"难过、受伤、需要安慰时",phrases:[
+    {en:"I can see you're feeling sad. I'm here.",zh:"我看到你很难过，我在这里。",tip:"先表示理解"},
+    {en:"Come here. Let me give you a hug.",zh:"来这里，让我抱抱你。",tip:""},
+    {en:"It's okay to feel sad sometimes.",zh:"有时候感到难过是没关系的。",tip:"接纳情绪"},
+    {en:"Do you want to talk about it?",zh:"你想说说发生什么了吗？",tip:"不强迫，给选择"},
+    {en:"I'm listening. Tell me what happened.",zh:"我在听，告诉我发生什么了。",tip:""},
+    {en:"That sounds really hard. I'm sorry.",zh:"听起来真的很难受，我很抱歉。",tip:"共情"},
+    {en:"Your feelings matter to me.",zh:"你的感受对我很重要。",tip:""},
+    {en:"I will always love you, no matter what.",zh:"不管发生什么，我永远爱你。",tip:""},
+    {en:"You're not alone. I'm always here.",zh:"你不是一个人，我一直在。",tip:""},
+    {en:"Let's take a deep breath together.",zh:"我们一起深呼吸。",tip:"帮助平静"},
+    {en:"Would you like some water?",zh:"要喝点水吗？",tip:"照顾身体感受"},
+    {en:"Do you need a little quiet time?",zh:"你需要安静一会儿吗？",tip:""},
+    {en:"It's okay to cry. Crying helps.",zh:"可以哭，哭出来会好一点。",tip:""},
+    {en:"I'm proud of you for telling me how you feel.",zh:"你告诉我你的感受，我很为你骄傲。",tip:"鼓励表达情绪"},
+    {en:"Do you feel a little better now?",zh:"现在好一点了吗？",tip:""},
+    {en:"I love you so much.",zh:"我非常爱你。",tip:"最简单也最有力"},
+  ]},
+  {id:"bodywords",label:"身体词汇",emoji:"🦷",hint:"全身部位名称与动作词",phrases:[
+    {en:"Head!",zh:"头！",tip:"指着自己说"},
+    {en:"Hair!",zh:"头发！",tip:""},
+    {en:"Forehead!",zh:"额头！",tip:""},
+    {en:"Eyes!",zh:"眼睛！",tip:""},
+    {en:"Eyebrows!",zh:"眉毛！",tip:""},
+    {en:"Nose!",zh:"鼻子！",tip:""},
+    {en:"Cheeks!",zh:"脸颊！",tip:"捏一捏"},
+    {en:"Mouth!",zh:"嘴巴！",tip:""},
+    {en:"Tongue!",zh:"舌头！",tip:"伸出来"},
+    {en:"Teeth!",zh:"牙齿！",tip:""},
+    {en:"Chin!",zh:"下巴！",tip:""},
+    {en:"Ears!",zh:"耳朵！",tip:""},
+    {en:"Neck!",zh:"脖子！",tip:""},
+    {en:"Shoulders!",zh:"肩膀！",tip:""},
+    {en:"Arms!",zh:"胳膊！",tip:""},
+    {en:"Elbows!",zh:"手肘！",tip:""},
+    {en:"Hands!",zh:"手！",tip:""},
+    {en:"Fingers!",zh:"手指！",tip:""},
+    {en:"Nails!",zh:"指甲！",tip:""},
+    {en:"Chest!",zh:"胸口！",tip:""},
+    {en:"Tummy! Belly!",zh:"肚子！",tip:"拍一拍"},
+    {en:"Back!",zh:"背部！",tip:""},
+    {en:"Bottom! Booty!",zh:"屁股！",tip:"孩子会觉得好笑"},
+    {en:"Legs!",zh:"腿！",tip:""},
+    {en:"Knees!",zh:"膝盖！",tip:""},
+    {en:"Feet!",zh:"脚！",tip:""},
+    {en:"Toes!",zh:"脚趾头！",tip:"数一数"},
+    {en:"Can you run? Run run run!",zh:"你会跑吗？跑跑跑！",tip:""},
+    {en:"Jump! Jump as high as you can!",zh:"跳！跳得越高越好！",tip:""},
+    {en:"Hop on one foot!",zh:"单脚跳！",tip:""},
+    {en:"Walk slowly. Tiptoe!",zh:"慢慢走，踮脚走！",tip:""},
+    {en:"Crawl! Get down on all fours!",zh:"爬！四肢着地爬！",tip:""},
+    {en:"Reach up high! Stretch!",zh:"伸手够高！拉伸！",tip:""},
+    {en:"Pick it up! Use both hands.",zh:"拿起来！用两只手。",tip:""},
+    {en:"Put it down gently.",zh:"轻轻放下来。",tip:""},
+    {en:"Throw it! Catch it!",zh:"扔！接！",tip:""},
+    {en:"Push! Pull!",zh:"推！拉！",tip:""},
+    {en:"Squeeze tight!",zh:"使劲捏！",tip:""},
+    {en:"Point to it!",zh:"指一指！",tip:""},
+  ]},
+  {id:"habits",label:"规矩习惯",emoji:"🌟",hint:"日常规则、好习惯养成",phrases:[
+    {en:"Put your toys away nicely, or we won't be able to find them next time!",zh:"要把玩具收好，不然下次就没办法找到了！",tip:"讲道理而不是命令"},
+    {en:"Everything has a home. Let's put it back.",zh:"每样东西都有自己的地方，我们把它放回去。",tip:""},
+    {en:"Please use a quiet voice inside.",zh:"在室内请用小声说话。",tip:""},
+    {en:"Walk, don't run inside the house.",zh:"在房子里走路，不要跑。",tip:""},
+    {en:"We don't throw things inside.",zh:"在室内我们不扔东西。",tip:""},
+    {en:"Please share. Everyone gets a turn.",zh:"请分享，每个人都有机会。",tip:""},
+    {en:"Wait for your turn, please.",zh:"请等一下，轮到你了再说。",tip:""},
+    {en:"We use kind words, not mean words.",zh:"我们说温柔的话，不说难听的话。",tip:""},
+    {en:"Say please and thank you.",zh:"说请和谢谢。",tip:"礼貌用语"},
+    {en:"We don't waste food. Finish what's on your plate.",zh:"我们不浪费食物，吃完盘子里的。",tip:""},
+    {en:"Turn off the light when you leave the room.",zh:"离开房间要关灯。",tip:""},
+    {en:"We save water. Turn off the tap.",zh:"节约用水，关掉水龙头。",tip:""},
+    {en:"Tissues go in the trash, not on the floor.",zh:"纸巾扔进垃圾桶，不要丢地上。",tip:""},
+    {en:"If you make a mess, you help clean it up.",zh:"弄乱了就要帮忙收拾。",tip:""},
+    {en:"We take care of our things.",zh:"我们要爱护自己的东西。",tip:""},
+    {en:"Treat others the way you want to be treated.",zh:"像你希望别人对你一样对待别人。",tip:"黄金法则"},
+  ]},
+];
+
+// ─── STORY DATA ───
+const DEFAULT_STORIES = JSON.parse("[{\"id\": \"liubao_kinder\", \"title\": \"六堡去幼儿园\", \"titleEn\": \"Liubao Goes to Kindergarten\", \"emoji\": \"🎒\", \"hint\": \"六堡每天上学的故事\", \"paras\": [{\"en\": \"Every morning, Mama wakes Liubao up.\", \"zh\": \"每天早上，妈妈都会叫六堡起床。\"}, {\"en\": \"Good morning, Liubao! Time to get ready!\", \"zh\": \"早上好，六堡！该准备出发啦！\"}, {\"en\": \"First, Liubao puts on his clothes. Shirt first, then pants!\", \"zh\": \"首先，六堡穿衣服。先穿上衣，再穿裤子！\"}, {\"en\": \"Then he brushes his teeth. Brush brush brush!\", \"zh\": \"然后刷牙。刷刷刷！\"}, {\"en\": \"Then he washes his face. Splash splash!\", \"zh\": \"然后洗脸。哗哗哗！\"}, {\"en\": \"He puts on his shoes. One foot, two feet!\", \"zh\": \"穿上鞋子。一只脚，两只脚！\"}, {\"en\": \"He puts on his little backpack. He is ready!\", \"zh\": \"背上小书包，准备好了！\"}, {\"en\": \"Liubao and Mama take the elevator down, down, down.\", \"zh\": \"六堡和妈妈坐电梯，下，下，下。\"}, {\"en\": \"If there is time, they walk through the front gate.\", \"zh\": \"如果时间够，他们走前门。\"}, {\"en\": \"If they are in a hurry, they go through the back gate!\", \"zh\": \"如果时间紧，就走后门！\"}, {\"en\": \"At the entrance of the neighborhood, they get in a car.\", \"zh\": \"到了小区门口，他们上车出发。\"}, {\"en\": \"Liubao looks out the window. So many things to see!\", \"zh\": \"六堡望向窗外，有好多东西可以看！\"}, {\"en\": \"Look! A bird's nest in the bamboo trees!\", \"zh\": \"看！竹子林里有鸟窝！\"}, {\"en\": \"A little further, there is a big robot.\", \"zh\": \"再往前，有一个大机器人。\"}, {\"en\": \"Then they pass the hospital, and three giant mushroom sculptures!\", \"zh\": \"然后经过医院，还有三个大蘑菇雕塑！\"}, {\"en\": \"They go through a tunnel. It is dark inside. Whoooosh!\", \"zh\": \"穿过一条隧道，里面黑黑的，呼——！\"}, {\"en\": \"Out of the tunnel, they can see Shenzhen Bay!\", \"zh\": \"出了隧道，就能看到深圳湾！\"}, {\"en\": \"There is the Spring Bamboo skyscraper, tall and shiny.\", \"zh\": \"春笋大厦在那里，高高的，亮亮的。\"}, {\"en\": \"Another bird's nest! says Liubao.\", \"zh\": \"又一个鸟窝！六堡说。\"}, {\"en\": \"They pass Crab Park. And on the other side —\", \"zh\": \"经过螃蟹乐园，对面——\"}, {\"en\": \"Five little horses! So cute!\", \"zh\": \"五只小马！好可爱呀！\"}, {\"en\": \"And then — they are here! It is kindergarten!\", \"zh\": \"然后——到了！幼儿园到了！\"}, {\"en\": \"A teacher is waiting at the gate. Good morning, Liubao!\", \"zh\": \"门口有老师在等。早上好，六堡！\"}, {\"en\": \"The school doctor checks Liubao.\", \"zh\": \"校医给六堡做晨检。\"}, {\"en\": \"Open your mouth! Say ahhh!\", \"zh\": \"张嘴，啊——！\"}, {\"en\": \"Now let us check your temperature. Beep!\", \"zh\": \"来量体温。滴——！\"}, {\"en\": \"He is healthy! She gives him a little blue fish.\", \"zh\": \"身体棒棒的！她给了他一条蓝色的小鱼。\"}, {\"en\": \"The foreign teacher smiles and says: Good morning!\", \"zh\": \"外教老师微笑着说：早上好！\"}, {\"en\": \"At the classroom door, Liubao sticks his blue fish under his photo.\", \"zh\": \"在教室门口，六堡把蓝色的小鱼贴在自己的照片下面。\"}, {\"en\": \"He puts down his backpack. He changes his shoes.\", \"zh\": \"他放下书包，换上室内鞋。\"}, {\"en\": \"He puts all his things in his own little cubby.\", \"zh\": \"把自己的东西放进自己的小柜子里。\"}, {\"en\": \"Then he washes his hands. Clean and ready!\", \"zh\": \"然后洗手，干干净净！\"}, {\"en\": \"Breakfast time! Today it might be congee, wontons, or scrambled eggs.\", \"zh\": \"早餐时间！今天可能有粥、馄饨，或者炒鸡蛋。\"}, {\"en\": \"Yummy yummy! When he is done, he puts his tray back on the cart.\", \"zh\": \"好吃好吃！吃完了，把餐盘放回餐车。\"}, {\"en\": \"Then everyone sings songs together. La la la!\", \"zh\": \"然后大家一起唱歌，啦啦啦！\"}, {\"en\": \"After songs, it is time to work. Liubao works hard!\", \"zh\": \"唱完歌，做工作，六堡认真地做！\"}, {\"en\": \"Then comes the morning snack. A little something yummy!\", \"zh\": \"然后吃早点，小小加一餐！\"}, {\"en\": \"Outside time! Liubao runs and plays.\", \"zh\": \"户外时间！六堡跑跑跳跳，开心玩耍。\"}, {\"en\": \"Then it is back inside. Wash hands, use the toilet.\", \"zh\": \"玩完回来，洗手，上厕所。\"}, {\"en\": \"Lunch is ready! Liubao eats up everything.\", \"zh\": \"午饭来了！六堡把饭饭都吃完。\"}, {\"en\": \"After lunch, a gentle walk. Step step step.\", \"zh\": \"饭后散散步，走走走。\"}, {\"en\": \"Then it is nap time. Liubao closes his eyes. Shhh...\", \"zh\": \"然后午睡时间，六堡闭上眼睛，嘘……\"}, {\"en\": \"After the nap, there is an afternoon snack. So good!\", \"zh\": \"睡醒了，吃午点，真好吃！\"}, {\"en\": \"And then — the door opens.\", \"zh\": \"然后——门开了。\"}, {\"en\": \"Grandpa and Grandma are here!\", \"zh\": \"爷爷奶奶来接六堡啦！\"}, {\"en\": \"Liubao! Time to go home!\", \"zh\": \"六堡！回家啦！\"}, {\"en\": \"What a wonderful day. See you tomorrow, kindergarten!\", \"zh\": \"真是美好的一天，幼儿园，明天见！\"}]}]");
+
+// ─── STATE ───
+let scenes = JSON.parse(localStorage.getItem('peg_scenes2') || 'null') || DEFAULT;
+let favs = JSON.parse(localStorage.getItem('peg_favs') || '[]'); // array of "sceneId::phraseEn"
+let history = JSON.parse(localStorage.getItem('peg_history') || '[]'); // [{en,zh,sceneLabel,count,lastUsed}]
+let currentSceneId = null;
+let modalMode = null, modalTarget = null;
+let activeSpeakBtn = null;
+let stories = JSON.parse(localStorage.getItem('peg_stories_v2') || 'null') || DEFAULT_STORIES;
+let currentStoryId = null;
+function saveStories() { localStorage.setItem('peg_stories_v2', JSON.stringify(stories)); }
+function getStory(id) { return stories.find(s => s.id === id); }
+
+function save() { localStorage.setItem('peg_scenes2', JSON.stringify(scenes)); }
+function saveFavs() { localStorage.setItem('peg_favs', JSON.stringify(favs)); }
+function saveHistory() { localStorage.setItem('peg_history', JSON.stringify(history)); }
+function getScene(id) { return scenes.find(s => s.id === id); }
+function favKey(sceneId, en) { return sceneId + '::' + en; }
+function isFav(sceneId, en) { return favs.includes(favKey(sceneId, en)); }
+
+function toggleFav(sceneId, en, zh, btn) {
+  const k = favKey(sceneId, en);
+  if (favs.includes(k)) {
+    favs = favs.filter(f => f !== k);
+    btn.textContent = '☆'; btn.classList.remove('fav-on');
+    showToast('已取消收藏');
+  } else {
+    favs.unshift(k);
+    btn.textContent = '⭐'; btn.classList.add('fav-on');
+    showToast('已收藏 ⭐');
+  }
+  saveFavs();
+  // update card style in current list
+  if (currentSceneId) renderPhraseList(currentSceneId);
+}
+
+function recordUsage(en, zh, sceneLabel) {
+  const existing = history.find(h => h.en === en);
+  if (existing) { existing.count++; existing.lastUsed = Date.now(); }
+  else { history.unshift({ en, zh, sceneLabel, count: 1, lastUsed: Date.now() }); }
+  if (history.length > 200) history = history.slice(0, 200);
+  saveHistory();
+}
+
+// ─── SPEECH ───
+let usVoice = null;
+function loadVoices() {
+  const all = speechSynthesis.getVoices();
+  usVoice = all.find(v => v.name === 'Samantha')
+    || all.find(v => v.name.includes('Google') && v.lang === 'en-US')
+    || all.find(v => v.lang === 'en-US')
+    || all.find(v => v.lang.startsWith('en'));
+}
+loadVoices();
+if ('onvoiceschanged' in speechSynthesis) speechSynthesis.onvoiceschanged = loadVoices;
+
+function speak(text, btn) {
+  if (!('speechSynthesis' in window)) { showToast('浏览器不支持朗读'); return; }
+  speechSynthesis.cancel();
+  if (activeSpeakBtn === btn) {
+    btn.textContent = '🔊'; btn.classList.remove('speaking'); activeSpeakBtn = null; return;
+  }
+  if (activeSpeakBtn) { activeSpeakBtn.textContent = '🔊'; activeSpeakBtn.classList.remove('speaking'); }
+  const utt = new SpeechSynthesisUtterance(text);
+  if (!usVoice) loadVoices();
+  if (usVoice) utt.voice = usVoice;
+  utt.lang = 'en-US'; utt.rate = 0.85; utt.pitch = 1.0;
+  btn.textContent = '⏹'; btn.classList.add('speaking'); activeSpeakBtn = btn;
+  utt.onend = utt.onerror = () => { btn.textContent = '🔊'; btn.classList.remove('speaking'); if (activeSpeakBtn === btn) activeSpeakBtn = null; };
+  speechSynthesis.speak(utt);
+}
+
+// ─── COPY ───
+function copyAndFlash(en, zh, sceneLabel, btn) {
+  recordUsage(en, zh, sceneLabel);
+  const flash = () => { btn.textContent = '✅'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = '📋'; btn.classList.remove('copied'); }, 1300); };
+  if (navigator.clipboard) navigator.clipboard.writeText(en).then(flash);
+  else { const t = document.createElement('textarea'); t.value = en; document.body.appendChild(t); t.select(); document.execCommand('copy'); document.body.removeChild(t); flash(); }
+}
+
+// ─── DAILY ───
+let dailyPhrase = null;
+function renderDaily() {
+  const allPhrases = [];
+  scenes.forEach(s => s.phrases.forEach(p => allPhrases.push({en:p.en,zh:p.zh,sceneLabel:s.label})));
+  const i = Math.floor(Date.now() / 86400000) % allPhrases.length;
+  dailyPhrase = allPhrases[i];
+  const p = dailyPhrase;
+  document.getElementById('dailyWrap').innerHTML = `
+    <div class="daily-card">
+      <div class="daily-label">✨ 今日推荐句子</div>
+      <div class="daily-en">${p.en}</div>
+      <div class="daily-zh">${p.zh}</div>
+      <div class="daily-actions">
+        <button class="daily-btn primary" id="dailySpeakBtn" onclick="speakDaily(this)">🔊 朗读</button>
+        <button class="daily-btn ghost" onclick="copyDaily(this)">📋 复制</button>
+      </div>
+    </div>
+  `;
+}
+
+function speakDaily(btn) { if (dailyPhrase) speak(dailyPhrase.en, btn); }
+function copyDaily(btn) {
+  if (!dailyPhrase) return;
+  recordUsage(dailyPhrase.en, dailyPhrase.zh, dailyPhrase.sceneLabel);
+  if (navigator.clipboard) navigator.clipboard.writeText(dailyPhrase.en).then(() => { btn.textContent = '✅ 已复制'; setTimeout(() => btn.textContent = '📋 复制', 1300); });
+}
+
+// ─── RENDER HOME ───
+function renderHome() {
+  renderDaily();
+  document.getElementById('sceneGrid').innerHTML = scenes.map((s,i) => {
+    const hasFav = favs.some(f => f.startsWith(s.id + '::'));
+    return `<div class="scene-tile tile-${i%10}" onclick="openScene('${s.id}')">
+      <div class="tile-emoji">${s.emoji}</div>
+      <div class="tile-name">${s.label}</div>
+      <div class="tile-count">${s.phrases.length} 句话</div>
+      ${hasFav ? '<div class="tile-fav-dot">⭐</div>' : ''}
+    </div>`;
+  }).join('');
+}
+
+// ─── RENDER PHRASES ───
+function renderPhraseList(sceneId) {
+  const scene = getScene(sceneId); if (!scene) return;
+  document.getElementById('phrasePageEmoji').textContent = scene.emoji;
+  document.getElementById('phrasePageTitle').textContent = scene.label;
+  document.getElementById('phrasePageHint').textContent = scene.hint;
+  document.getElementById('phraseList').innerHTML = scene.phrases.map((p,i) => buildCard(p, sceneId, i, '')).join('');
+}
+
+function buildCard(p, sceneId, idx, catLabel) {
+  const fav = sceneId ? isFav(sceneId, p.en) : false;
+  const used = history.find(h => h.en === p.en);
+  const scene = getScene(sceneId);
+  const sceneLabel = scene ? scene.label : '';
+  const editBtn = sceneId ? `<button class="action-btn" onclick="openEditPhrase('${sceneId}',${idx})">✏️</button>` : '';
+  const favBtn = sceneId ? `<button class="action-btn ${fav?'fav-on':''}" onclick="toggleFavIdx('${sceneId}',${idx},this)">${fav?'⭐':'☆'}</button>` : '';
+  return `<div class="phrase-card ${fav?'is-fav':''} ${used?'used-recently':''}">
+    ${catLabel ? `<div class="cat-label">${catLabel}</div>` : ''}
+    <div class="card-top">
+      <div class="card-text">
+        <div class="en">${p.en}</div>
+        <div class="zh">${p.zh}</div>
+        <div class="card-badges">
+          ${p.tip ? `<span class="tip-badge">💡 ${p.tip}</span>` : ''}
+          ${used ? `<span class="used-badge">已用 ${used.count} 次</span>` : ''}
+        </div>
+      </div>
+    </div>
+    <div class="card-actions">
+      <button class="action-btn" onclick="speakIdx('${sceneId}',${idx},this)">🔊</button>
+      <button class="action-btn" onclick="copyIdx('${sceneId}',${idx},this)">📋</button>
+      ${favBtn}
+      ${editBtn}
+    </div>
+  </div>`;
+}
+
+// ─── RENDER FAVS ───
+function renderFavs() {
+  const el = document.getElementById('favList');
+  if (!favs.length) {
+    el.innerHTML = `<div class="fav-empty"><div class="fav-empty-icon">⭐</div><div class="fav-empty-text">还没有收藏任何句子<br>点击句子卡片上的 ☆ 来收藏</div></div>`;
+    return;
+  }
+  const cards = [];
+  favs.forEach(k => {
+    const [sid, ...rest] = k.split('::'); const en = rest.join('::');
+    const scene = getScene(sid); if (!scene) return;
+    const p = scene.phrases.find(x => x.en === en);
+    const pObj = p || {en, zh:'', tip:''};
+    const i = scene.phrases.indexOf(pObj);
+    cards.push(buildCard(pObj, sid, i, scene.emoji + ' ' + scene.label));
+  });
+  el.innerHTML = cards.join('') || '<div class="fav-empty"><div class="fav-empty-text">收藏的句子暂时无法找到</div></div>';
+}
+
+// ─── RENDER HISTORY ───
+function renderHistory() {
+  const el = document.getElementById('historyList');
+  if (!history.length) {
+    el.innerHTML = '<div class="history-empty">还没有学习记录<br>使用句子后会自动记录在这里 📝</div>';
+    return;
+  }
+  const sorted = [...history].sort((a,b) => b.lastUsed - a.lastUsed);
+  el.innerHTML = sorted.map(h => {
+    const d = new Date(h.lastUsed);
+    const timeStr = d.toLocaleDateString('zh-CN', {month:'numeric',day:'numeric'}) + ' ' + d.toLocaleTimeString('zh-CN', {hour:'2-digit',minute:'2-digit'});
+    return `<div class="history-item">
+      <div class="history-en">${h.en}</div>
+      <div class="history-zh">${h.zh}</div>
+      <div class="history-meta">
+        <span>${h.sceneLabel || ''}</span>
+        <span class="history-count">使用 ${h.count} 次</span>
+        <span>${timeStr}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function clearHistory() {
+  if (!confirm('确定清空所有学习记录？')) return;
+  history = []; saveHistory(); renderHistory(); showToast('已清空记录');
+}
+
+// ─── RENDER EDIT ───
+function renderEditList() {
+  document.getElementById('editSceneList').innerHTML = scenes.map(s => `
+    <div class="edit-scene-row">
+      <div class="edit-scene-emoji">${s.emoji}</div>
+      <div class="edit-scene-info">
+        <div class="edit-scene-name">${s.label}</div>
+        <div class="edit-scene-count">${s.phrases.length} 句 · ${s.hint || '无描述'}</div>
+      </div>
+      <div class="edit-scene-btns">
+        <div class="edit-icon-btn" onclick="openEditScene('${s.id}')">✏️</div>
+        <div class="edit-icon-btn danger" onclick="deleteScene('${s.id}')">🗑</div>
+      </div>
+    </div>`).join('');
+}
+
+// ─── NAV ───
+let currentNav = 'home';
+function switchNav(tab) {
+  ['home','picturebook','stories','fav','history','edit'].forEach(t => document.getElementById('nav-'+t).classList.toggle('active', t===tab));
+  if (tab === 'home') { goHome(); return; }
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-'+tab).classList.add('active');
+  currentNav = tab;
+  if (tab === 'picturebook') renderPbList();
+  else if (tab === 'stories') renderStoriesList();
+  else if (tab === 'fav') renderFavs();
+  else if (tab === 'history') renderHistory();
+  else if (tab === 'edit') renderEditList();
+  speechSynthesis.cancel && speechSynthesis.cancel();
+}
+
+function goHome() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-home').classList.add('active');
+  ['home','picturebook','stories','fav','history','edit'].forEach(t => document.getElementById('nav-'+t).classList.toggle('active', t==='home'));
+  renderHome(); currentSceneId = null; currentNav = 'home';
+  speechSynthesis.cancel && speechSynthesis.cancel();
+}
+
+function openScene(id) {
+  currentSceneId = id;
+  renderPhraseList(id);
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-phrases').classList.add('active');
+}
+
+// ─── SEARCH ───
+function openSearch() {
+  document.getElementById('searchOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('searchInput').focus(), 80);
+}
+function closeSearch() {
+  document.getElementById('searchOverlay').classList.remove('open');
+  document.getElementById('searchInput').value = '';
+  document.getElementById('searchResults').innerHTML = '<div class="search-empty">输入关键词开始搜索<br>支持中英文 🔤</div>';
+  speechSynthesis.cancel && speechSynthesis.cancel();
+}
+function doSearch(q) {
+  q = (q||'').trim().toLowerCase();
+  const el = document.getElementById('searchResults');
+  if (!q) { el.innerHTML = '<div class="search-empty">输入关键词开始搜索<br>支持中英文 🔤</div>'; return; }
+  const res = [];
+  scenes.forEach(scene => scene.phrases.forEach((p,i) => {
+    if (p.en.toLowerCase().includes(q) || p.zh.includes(q) || scene.label.includes(q))
+      res.push({p, scene, i});
+  }));
+  el.innerHTML = res.length
+    ? res.map(r => buildCard(r.p, r.scene.id, r.i, r.scene.emoji+' '+r.scene.label)).join('')
+    : `<div class="search-empty">没有找到"${q}"相关句子 😅</div>`;
+}
+
+// ─── TOAST ───
+let toastT;
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg; el.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(() => el.classList.remove('show'), 1800);
+}
+
+// ─── MODAL ───
+function openModal(title, body) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = body;
+  document.getElementById('modalBg').classList.add('open');
+}
+function closeModal() { document.getElementById('modalBg').classList.remove('open'); }
+function closeModalBg(e) { if (e.target === document.getElementById('modalBg')) closeModal(); }
+
+function openAddScene() {
+  modalMode = 'add-scene'; modalTarget = null;
+  openModal('新建场景', `
+    <label>Emoji 图标</label>
+    <input id="m-emoji" maxlength="4" value="🆕" placeholder="例如 🏥">
+    <label>场景名称</label>
+    <input id="m-label" placeholder="例如 看医生">
+    <label>描述（可选）</label>
+    <input id="m-hint" placeholder="例如 看诊、打针">
+  `);
+  setTimeout(() => document.getElementById('m-label').focus(), 120);
+}
+
+function openEditScene(id) {
+  const s = getScene(id); if (!s) return;
+  modalMode = 'edit-scene'; modalTarget = id;
+  openModal('编辑场景', `
+    <label>Emoji 图标</label>
+    <input id="m-emoji" maxlength="4" value="${s.emoji}">
+    <label>场景名称</label>
+    <input id="m-label" value="${s.label}">
+    <label>描述</label>
+    <input id="m-hint" value="${s.hint}">
+  `);
+}
+
+function deleteScene(id) {
+  if (!confirm('确定删除这个场景和里面所有句子？')) return;
+  scenes = scenes.filter(s => s.id !== id);
+  favs = favs.filter(f => !f.startsWith(id + '::'));
+  save(); saveFavs(); renderHome(); renderEditList(); showToast('场景已删除');
+}
+
+function openAddPhrase() {
+  modalMode = 'add-phrase'; modalTarget = { sceneId: currentSceneId };
+  openModal('添加句子', `
+    <label>英文句子</label>
+    <textarea id="m-en" placeholder="Good morning!"></textarea>
+    <label>中文意思</label>
+    <input id="m-zh" placeholder="早上好！">
+    <label>小贴士（可选）</label>
+    <input id="m-tip" placeholder="使用场景或小技巧">
+  `);
+  setTimeout(() => document.getElementById('m-en').focus(), 120);
+}
+
+function openEditPhrase(sceneId, idx) {
+  const scene = getScene(sceneId); if (!scene) return;
+  const p = scene.phrases[idx];
+  modalMode = 'edit-phrase'; modalTarget = { sceneId, idx };
+  openModal('编辑句子', `
+    <label>英文句子</label>
+    <textarea id="m-en">${p.en}</textarea>
+    <label>中文意思</label>
+    <input id="m-zh" value="${p.zh}">
+    <label>小贴士（可选）</label>
+    <input id="m-tip" value="${p.tip||''}">
+    <button class="del-btn" onclick="deletePhrase('${sceneId}',${idx})">🗑 删除这句话</button>
+  `);
+}
+
+function deletePhrase(sceneId, idx) {
+  if (!confirm('确定删除？')) return;
+  const scene = getScene(sceneId); if (!scene) return;
+  const en = scene.phrases[idx].en;
+  favs = favs.filter(f => f !== favKey(sceneId, en));
+  scene.phrases.splice(idx, 1);
+  save(); saveFavs(); renderPhraseList(sceneId); closeModal(); showToast('已删除');
+}
+
+function modalSave() {
+  if (modalMode === 'add-scene') {
+    const label = (document.getElementById('m-label').value||'').trim();
+    if (!label) { showToast('请填写场景名称'); return; }
+    scenes.push({ id:'s'+Date.now(), emoji:document.getElementById('m-emoji').value.trim()||'📌', label, hint:document.getElementById('m-hint').value.trim(), phrases:[] });
+    save(); renderHome(); renderEditList(); closeModal(); showToast('场景已添加 ✓');
+  } else if (modalMode === 'edit-scene') {
+    const s = getScene(modalTarget); if (!s) return;
+    s.emoji = document.getElementById('m-emoji').value.trim() || s.emoji;
+    s.label = document.getElementById('m-label').value.trim() || s.label;
+    s.hint  = document.getElementById('m-hint').value.trim();
+    save(); renderHome(); renderEditList(); closeModal(); showToast('已保存 ✓');
+  } else if (modalMode === 'add-phrase') {
+    const en = (document.getElementById('m-en').value||'').trim();
+    if (!en) { showToast('请填写英文句子'); return; }
+    const scene = getScene(modalTarget.sceneId); if (!scene) return;
+    scene.phrases.push({ en, zh:document.getElementById('m-zh').value.trim(), tip:document.getElementById('m-tip').value.trim() });
+    save(); renderPhraseList(modalTarget.sceneId); closeModal(); showToast('句子已添加 ✓');
+  } else if (modalMode === 'add-pb') {
+    const title = (document.getElementById('m-title').value||'').trim();
+    if (!title) { showToast('请填写书名'); return; }
+    picturebooks.push({ id:'pb'+Date.now(), emoji:document.getElementById('m-emoji').value.trim()||'📚', title, titleZh:document.getElementById('m-title-zh').value.trim(), series:document.getElementById('m-series').value.trim(), hint:document.getElementById('m-hint').value.trim(), pages:[] });
+    savePb(); renderPbList(); closeModal(); showToast('绘本已添加 ✓');
+  } else if (modalMode === 'edit-pb') {
+    const b = getPb(modalTarget); if (!b) return;
+    b.emoji = document.getElementById('m-emoji').value.trim() || b.emoji;
+    b.title = document.getElementById('m-title').value.trim() || b.title;
+    b.titleZh = document.getElementById('m-title-zh').value.trim();
+    b.series = document.getElementById('m-series').value.trim();
+    b.hint = document.getElementById('m-hint').value.trim();
+    savePb(); openPb(b.id); closeModal(); showToast('已保存 ✓');
+  } else if (modalMode === 'add-pb-page') {
+    const en = (document.getElementById('m-en').value||'').trim();
+    if (!en) { showToast('请填写英文内容'); return; }
+    const b = getPb(modalTarget.bid); if (!b) return;
+    b.pages.push({ pageNum:document.getElementById('m-pagenum').value.trim()||('第'+(b.pages.length+1)+'页'), en, zh:(document.getElementById('m-zh').value||'').trim(), guide:(document.getElementById('m-guide').value||'').trim() });
+    savePb(); renderPbContent(b); closeModal(); showToast('页面已添加 ✓');
+  } else if (modalMode === 'edit-pb-page') {
+    const { bid, idx } = modalTarget;
+    const b = getPb(bid); if (!b) return;
+    const en = (document.getElementById('m-en').value||'').trim();
+    if (!en) { showToast('英文内容不能为空'); return; }
+    b.pages[idx] = { pageNum:document.getElementById('m-pagenum').value.trim(), en, zh:(document.getElementById('m-zh').value||'').trim(), guide:(document.getElementById('m-guide').value||'').trim() };
+    savePb(); renderPbContent(b); closeModal(); showToast('已保存 ✓');
+  } else if (modalMode === 'add-story') {
+    const title = (document.getElementById('m-title').value||'').trim();
+    if (!title) { showToast('请填写故事标题'); return; }
+    stories.push({ id:'st'+Date.now(), emoji:document.getElementById('m-emoji').value.trim()||'📖', title, titleEn:document.getElementById('m-title-en').value.trim(), hint:document.getElementById('m-hint').value.trim(), paras:[] });
+    saveStories(); renderStoriesList(); closeModal(); showToast('故事已添加 ✓');
+  } else if (modalMode === 'edit-story') {
+    const s = getStory(modalTarget); if (!s) return;
+    s.emoji = document.getElementById('m-emoji').value.trim() || s.emoji;
+    s.title = document.getElementById('m-title').value.trim() || s.title;
+    s.titleEn = document.getElementById('m-title-en').value.trim();
+    s.hint = document.getElementById('m-hint').value.trim();
+    saveStories(); openStory(s.id); closeModal(); showToast('已保存 ✓');
+  } else if (modalMode === 'add-para') {
+    const en = (document.getElementById('m-en').value||'').trim();
+    if (!en) { showToast('请填写英文内容'); return; }
+    const s = getStory(modalTarget.storyId); if (!s) return;
+    s.paras.push({ en, zh:(document.getElementById('m-zh').value||'').trim() });
+    saveStories(); renderStoryContent(s); closeModal(); showToast('段落已添加 ✓');
+  } else if (modalMode === 'edit-para') {
+    const { storyId, idx } = modalTarget;
+    const s = getStory(storyId); if (!s) return;
+    const en = (document.getElementById('m-en').value||'').trim();
+    if (!en) { showToast('英文内容不能为空'); return; }
+    s.paras[idx] = { en, zh:(document.getElementById('m-zh').value||'').trim() };
+    saveStories(); renderStoryContent(s); closeModal(); showToast('已保存 ✓');
+  } else if (modalMode === 'edit-phrase') {
+    const {sceneId, idx} = modalTarget;
+    const scene = getScene(sceneId); if (!scene) return;
+    const en = (document.getElementById('m-en').value||'').trim();
+    if (!en) { showToast('英文句子不能为空'); return; }
+    const oldEn = scene.phrases[idx].en;
+    // update fav key if en changed
+    if (oldEn !== en) {
+      const oldKey = favKey(sceneId, oldEn);
+      const newKey = favKey(sceneId, en);
+      favs = favs.map(f => f === oldKey ? newKey : f);
+      saveFavs();
+    }
+    scene.phrases[idx] = { en, zh:document.getElementById('m-zh').value.trim(), tip:document.getElementById('m-tip').value.trim() };
+    save(); renderPhraseList(sceneId); closeModal(); showToast('已保存 ✓');
+  }
+}
+
+
+// ─── STORIES ───
+function renderStoriesList() {
+  const el = document.getElementById('storiesList');
+  el.innerHTML = '<div class="section-label" style="margin-top:4px;">故事库 📖</div>' +
+    stories.map(s => `
+    <div class="story-card" onclick="openStory('${s.id}')">
+      <div class="story-card-emoji">${s.emoji}</div>
+      <div class="story-card-info">
+        <div class="story-card-title">${s.title}</div>
+        <div class="story-card-hint">${s.titleEn}</div>
+        <div class="story-card-count">${s.paras.length} 段 · ${s.hint}</div>
+      </div>
+      <div style="font-size:20px;color:var(--muted);">›</div>
+    </div>`).join('') +
+    `<button class="add-story-btn" onclick="openAddStory()">＋ 新建故事</button>`;
+}
+
+function openStory(id) {
+  currentStoryId = id;
+  const s = getStory(id); if (!s) return;
+  document.getElementById('storyReaderTitle').textContent = s.emoji + ' ' + s.title;
+  document.getElementById('storyReaderHint').textContent = s.titleEn;
+  renderStoryContent(s);
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-story-reader').classList.add('active');
+}
+
+function renderStoryContent(s) {
+  const sid = s.id;
+  const enText = s.paras.map(p => p.en).join(' ');
+  const zhText = s.paras.map(p => p.zh).join('');
+  document.getElementById('storyContent').innerHTML = `
+    <div class="story-full-card">
+      <div class="story-full-en">${s.paras.map(p => p.en).join(' ')}</div>
+      <div class="story-full-divider"></div>
+      <div class="story-full-zh">${s.paras.map(p => p.zh).join('')}</div>
+    </div>
+    <div class="story-bottom-actions">
+      <button class="story-action-big" id="storyReadAllBtn" onclick="speakStoryAll('${sid}', this)">🔊 朗读全文</button>
+      <button class="story-action-big ghost" onclick="openAddPara('${sid}')">＋ 添加段落</button>
+    </div>
+    <div class="story-para-list" id="storyParaList-${sid}">
+      <div class="story-para-toggle" onclick="toggleParaList('${sid}')">
+        <span>逐段编辑</span><span id="storyParaArrow-${sid}">›</span>
+      </div>
+      <div id="storyParaExpand-${sid}" style="display:none">
+        ${s.paras.map((p,i) => `
+          <div class="story-para-row">
+            <div class="story-para-row-en">${p.en}</div>
+            <div class="story-para-row-zh">${p.zh}</div>
+            <div class="story-para-row-btns">
+              <button class="action-btn" onclick="speakStory('${sid}',${i},this)">🔊</button>
+              <button class="action-btn" onclick="openEditPara('${sid}',${i})">✏️</button>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function toggleParaList(sid) {
+  const el = document.getElementById('storyParaExpand-' + sid);
+  const arrow = document.getElementById('storyParaArrow-' + sid);
+  const open = el.style.display === 'none';
+  el.style.display = open ? 'block' : 'none';
+  arrow.textContent = open ? '∨' : '›';
+}
+
+function speakStoryAll(storyId, btn) {
+  const s = getStory(storyId); if (!s) return;
+  const fullText = s.paras.map(p => p.en).join(' ');
+  speak(fullText, btn);
+}
+
+function goStories() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-stories').classList.add('active');
+  ['home','picturebook','stories','fav','history','edit'].forEach(t => document.getElementById('nav-'+t).classList.toggle('active', t==='stories'));
+  renderStoriesList();
+  speechSynthesis.cancel && speechSynthesis.cancel();
+}
+
+function openAddStory() {
+  modalMode = 'add-story'; modalTarget = null;
+  openModal('新建故事', `
+    <label>Emoji 图标</label><input id="m-emoji" maxlength="4" value="📖">
+    <label>中文标题</label><input id="m-title" placeholder="例如 小熊去超市">
+    <label>英文标题</label><input id="m-title-en" placeholder="例如 Bear Goes to the Supermarket">
+    <label>描述</label><input id="m-hint" placeholder="一句话介绍">
+  `);
+  setTimeout(() => document.getElementById('m-title').focus(), 120);
+}
+
+function openEditStory() {
+  const s = getStory(currentStoryId); if (!s) return;
+  modalMode = 'edit-story'; modalTarget = currentStoryId;
+  openModal('编辑故事信息', `
+    <label>Emoji 图标</label><input id="m-emoji" maxlength="4" value="${s.emoji}">
+    <label>中文标题</label><input id="m-title" value="${s.title}">
+    <label>英文标题</label><input id="m-title-en" value="${s.titleEn}">
+    <label>描述</label><input id="m-hint" value="${s.hint}">
+    <button class="del-btn" onclick="deleteStory('${s.id}')">🗑 删除这个故事</button>
+  `);
+}
+
+function openAddPara(storyId) {
+  modalMode = 'add-para'; modalTarget = { storyId };
+  openModal('添加段落', `
+    <label>英文</label><textarea id="m-en" placeholder="Liubao smiled."></textarea>
+    <label>中文</label><textarea id="m-zh" placeholder="六堡笑了。"></textarea>
+  `);
+  setTimeout(() => document.getElementById('m-en').focus(), 120);
+}
+
+function openEditPara(storyId, idx) {
+  const s = getStory(storyId); if (!s) return;
+  const p = s.paras[idx];
+  modalMode = 'edit-para'; modalTarget = { storyId, idx };
+  openModal('编辑段落', `
+    <label>英文</label><textarea id="m-en">${p.en}</textarea>
+    <label>中文</label><textarea id="m-zh">${p.zh}</textarea>
+    <button class="del-btn" onclick="deletePara('${storyId}',${idx})">🗑 删除这段</button>
+  `);
+}
+
+function deleteStory(id) {
+  if (!confirm('确定删除这个故事？')) return;
+  stories = stories.filter(s => s.id !== id);
+  saveStories(); closeModal(); goStories(); showToast('故事已删除');
+}
+
+function deletePara(storyId, idx) {
+  if (!confirm('确定删除这段？')) return;
+  const s = getStory(storyId); if (!s) return;
+  s.paras.splice(idx, 1);
+  saveStories(); renderStoryContent(s); closeModal(); showToast('已删除');
+}
+
+
+function speakIdx(sceneId, idx, btn) {
+  const scene = getScene(sceneId);
+  if (scene && scene.phrases[idx]) speak(scene.phrases[idx].en, btn);
+}
+function copyIdx(sceneId, idx, btn) {
+  const scene = getScene(sceneId);
+  if (!scene || !scene.phrases[idx]) return;
+  const p = scene.phrases[idx];
+  copyAndFlash(p.en, p.zh, scene.label, btn);
+}
+function toggleFavIdx(sceneId, idx, btn) {
+  const scene = getScene(sceneId);
+  if (scene && scene.phrases[idx]) toggleFav(sceneId, scene.phrases[idx].en, scene.phrases[idx].zh, btn);
+}
+function speakStory(storyId, idx, btn) {
+  const s = getStory(storyId);
+  if (s && s.paras[idx]) speak(s.paras[idx].en, btn);
+}
+function copyStory(storyId, idx, btn) {
+  const s = getStory(storyId);
+  if (!s || !s.paras[idx]) return;
+  copyAndFlash(s.paras[idx].en, s.paras[idx].zh, s.title, btn);
+}
+
+
+// ─── PICTUREBOOK DATA ───
+const DEFAULT_PB = JSON.parse("[{\"id\": \"oxford_stage1_1\", \"title\": \"Kipper's Toybox\", \"titleZh\": \"奇波的玩具箱\", \"emoji\": \"📦\", \"series\": \"牛津树 Stage 1+\", \"hint\": \"Kipper的玩具不见了！\", \"pages\": [{\"pageNum\": \"封面\", \"en\": \"Kipper's Toybox\", \"zh\": \"奇波的玩具箱\", \"guide\": \"Look at the cover. This is Kipper. What do you think is in the box?\"}, {\"pageNum\": \"第1页\", \"en\": \"Kipper had a toybox.\", \"zh\": \"奇波有一个玩具箱。\", \"guide\": \"What is inside? Can you see any toys?\"}, {\"pageNum\": \"第2页\", \"en\": \"One day, he looked inside.\", \"zh\": \"有一天，他往里面看。\", \"guide\": \"What is Kipper doing? He is looking inside!\"}, {\"pageNum\": \"第3页\", \"en\": \"I can see two eyes!\", \"zh\": \"我看到两只眼睛！\", \"guide\": \"Oh no! Make a scared face! Whose eyes are they?\"}, {\"pageNum\": \"第4页\", \"en\": \"It was Floppy!\", \"zh\": \"原来是弗洛比！\", \"guide\": \"It is Floppy the dog! Was Kipper scared? Phew!\"}, {\"pageNum\": \"第5页\", \"en\": \"Kipper laughed.\", \"zh\": \"奇波笑了。\", \"guide\": \"Can you laugh like Kipper? Ha ha ha!\"}, {\"pageNum\": \"封底\", \"en\": \"The end! What was in the toybox?\", \"zh\": \"结束！玩具箱里有什么？\", \"guide\": \"Let us count all the toys we saw. Good reading!\"}]}, {\"id\": \"oxford_stage1_2\", \"title\": \"Biff's Aeroplane\", \"titleZh\": \"比芙的小飞机\", \"emoji\": \"✈️\", \"series\": \"牛津树 Stage 1\", \"hint\": \"比芙做了一架纸飞机\", \"pages\": [{\"pageNum\": \"封面\", \"en\": \"Biff's Aeroplane\", \"zh\": \"比芙的小飞机\", \"guide\": \"Look at the cover! What is Biff holding?\"}, {\"pageNum\": \"第1页\", \"en\": \"Biff made an aeroplane.\", \"zh\": \"比芙做了一架飞机。\", \"guide\": \"Can you make a paper plane? Fold fold fold!\"}, {\"pageNum\": \"第2页\", \"en\": \"She threw it.\", \"zh\": \"她把飞机扔了出去。\", \"guide\": \"Throw your arms like Biff! Whoosh!\"}, {\"pageNum\": \"第3页\", \"en\": \"It went up.\", \"zh\": \"飞机飞上去了。\", \"guide\": \"Point up high! Up up up!\"}, {\"pageNum\": \"第4页\", \"en\": \"It went down.\", \"zh\": \"飞机飞下来了。\", \"guide\": \"Point down! Oh no, it is coming down!\"}, {\"pageNum\": \"第5页\", \"en\": \"Floppy got it!\", \"zh\": \"弗洛比把它叼走了！\", \"guide\": \"Floppy grabbed the plane! Was Biff happy or sad?\"}, {\"pageNum\": \"封底\", \"en\": \"The end! Where did the aeroplane go?\", \"zh\": \"结束！飞机去哪里了？\", \"guide\": \"Great job reading today!\"}]}]");
+
+let picturebooks = JSON.parse(localStorage.getItem('peg_pb_v2') || 'null') || DEFAULT_PB;
+let currentPbId = null;
+function savePb() { localStorage.setItem('peg_pb_v2', JSON.stringify(picturebooks)); }
+function getPb(id) { return picturebooks.find(b => b.id === id); }
+
+function renderPbList() {
+  const el = document.getElementById('pbList');
+  el.innerHTML = '<div class="section-label" style="margin-top:4px;">绘本导读 🎨</div>' +
+    picturebooks.map(b => `
+    <div class="pb-card" onclick="openPb('${b.id}')">
+      <div class="pb-card-emoji">${b.emoji}</div>
+      <div class="pb-card-info">
+        <div class="pb-card-title">${b.title}</div>
+        <div class="pb-card-hint">${b.series} · ${b.titleZh}</div>
+        <div class="pb-card-count">${b.pages.length} 页 · ${b.hint}</div>
+      </div>
+      <div style="font-size:20px;color:var(--muted);">›</div>
+    </div>`).join('') +
+    `<button class="add-story-btn" onclick="openAddPb()">＋ 添加绘本</button>`;
+}
+
+function openPb(id) {
+  currentPbId = id;
+  const b = getPb(id); if (!b) return;
+  document.getElementById('pbReaderTitle').textContent = b.emoji + ' ' + b.title;
+  document.getElementById('pbReaderHint').textContent = b.series + ' · ' + b.hint;
+  renderPbContent(b);
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-pb-reader').classList.add('active');
+}
+
+function renderPbContent(b) {
+  const bid = b.id;
+  document.getElementById('pbContent').innerHTML = b.pages.map((pg, i) => {
+    return `<div class="pb-page-card">
+      <div class="pb-page-num">${pg.pageNum}</div>
+      <div class="pb-page-text">${pg.en}</div>
+      <div class="pb-page-zh">${pg.zh}</div>
+      ${pg.guide ? `<div class="pb-page-guide">💬 ${pg.guide}</div>` : ''}
+      <div class="pb-page-actions">
+        <button class="action-btn" style="flex:1" onclick="speakPb('${bid}',${i},this)">🔊 朗读</button>
+        <button class="action-btn" style="flex:1" onclick="copyPb('${bid}',${i},this)">📋 复制</button>
+        <button class="action-btn" style="width:36px;flex:none" onclick="openEditPbPage('${bid}',${i})">✏️</button>
+      </div>
+    </div>`;
+  }).join('') +
+  `<button class="add-story-btn" style="margin-top:4px" onclick="openAddPbPage('${b.id}')">＋ 添加页面</button>`;
+}
+
+function goPicturebooks() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-picturebook').classList.add('active');
+  ['home','picturebook','stories','fav','history','edit'].forEach(t => document.getElementById('nav-'+t).classList.toggle('active', t==='picturebook'));
+  renderPbList();
+  speechSynthesis.cancel && speechSynthesis.cancel();
+}
+
+function speakPb(bid, idx, btn) { const b = getPb(bid); if (b && b.pages[idx]) speak(b.pages[idx].en, btn); }
+function copyPb(bid, idx, btn) {
+  const b = getPb(bid); if (!b || !b.pages[idx]) return;
+  copyAndFlash(b.pages[idx].en, b.pages[idx].zh, b.title, btn);
+}
+
+function openAddPb() {
+  modalMode = 'add-pb'; modalTarget = null;
+  openModal('添加绘本', `
+    <label>Emoji 图标</label><input id="m-emoji" maxlength="4" value="📚">
+    <label>英文书名</label><input id="m-title" placeholder="The Very Hungry Caterpillar">
+    <label>中文书名</label><input id="m-title-zh" placeholder="好饿的毛毛虫">
+    <label>系列/级别</label><input id="m-series" placeholder="牛津树 Stage 2">
+    <label>简介</label><input id="m-hint" placeholder="一句话介绍">
+  `);
+  setTimeout(() => document.getElementById('m-title').focus(), 120);
+}
+
+function openEditPb() {
+  const b = getPb(currentPbId); if (!b) return;
+  modalMode = 'edit-pb'; modalTarget = currentPbId;
+  openModal('编辑绘本信息', `
+    <label>Emoji 图标</label><input id="m-emoji" maxlength="4" value="${b.emoji}">
+    <label>英文书名</label><input id="m-title" value="${b.title}">
+    <label>中文书名</label><input id="m-title-zh" value="${b.titleZh}">
+    <label>系列/级别</label><input id="m-series" value="${b.series}">
+    <label>简介</label><input id="m-hint" value="${b.hint}">
+    <button class="del-btn" onclick="deletePb('${b.id}')">🗑 删除这本绘本</button>
+  `);
+}
+
+function openAddPbPage(bid) {
+  modalMode = 'add-pb-page'; modalTarget = { bid };
+  openModal('添加页面', `
+    <label>页码</label><input id="m-pagenum" placeholder="第6页">
+    <label>英文原文</label><textarea id="m-en" placeholder="The caterpillar was hungry."></textarea>
+    <label>中文翻译</label><textarea id="m-zh" placeholder="毛毛虫很饿。"></textarea>
+    <label>讲读引导（可选）</label><textarea id="m-guide" placeholder="引导孩子看图或互动的句子"></textarea>
+  `);
+  setTimeout(() => document.getElementById('m-pagenum').focus(), 120);
+}
+
+function openEditPbPage(bid, idx) {
+  const b = getPb(bid); if (!b) return;
+  const pg = b.pages[idx];
+  modalMode = 'edit-pb-page'; modalTarget = { bid, idx };
+  openModal('编辑页面', `
+    <label>页码</label><input id="m-pagenum" value="${pg.pageNum}">
+    <label>英文原文</label><textarea id="m-en">${pg.en}</textarea>
+    <label>中文翻译</label><textarea id="m-zh">${pg.zh}</textarea>
+    <label>讲读引导</label><textarea id="m-guide">${pg.guide||''}</textarea>
+    <button class="del-btn" onclick="deletePbPage('${bid}',${idx})">🗑 删除这页</button>
+  `);
+}
+
+function deletePb(id) {
+  if (!confirm('确定删除这本绘本？')) return;
+  picturebooks = picturebooks.filter(b => b.id !== id);
+  savePb(); closeModal(); goPicturebooks(); showToast('绘本已删除');
+}
+function deletePbPage(bid, idx) {
+  if (!confirm('确定删除这页？')) return;
+  const b = getPb(bid); if (!b) return;
+  b.pages.splice(idx, 1);
+  savePb(); renderPbContent(b); closeModal(); showToast('已删除');
+}
+
+// ─── INIT ───
+renderHome();
+</script>
+</body>
+</html>
